@@ -1,7 +1,5 @@
 # Relatório semanal de ações da B3
 
-> Made by Lydson
-
 Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a partir dos **dados abertos da CVM**, e toda segunda às 8h chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
 
 <!-- Depois de recortar o print do e-mail (sem o seu endereço e foto), salve em docs/email.png e remova os comentários da linha abaixo -->
