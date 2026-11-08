@@ -1,22 +1,14 @@
 # Relatório semanal de ações da B3
 
-Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a partir dos **dados abertos da CVM**, e toda segunda às 8h chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
+Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a partir dos **dados abertos da CVM**, e toda segunda de manhã chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
 
-<!-- Depois de recortar o print do e-mail (sem o seu endereço e foto), salve em docs/email.png e remova os comentários da linha abaixo -->
-<!-- ![Exemplo do e-mail semanal](docs/email.png) -->
+![E-mail semanal com preço, P/L, P/VP e ROE de cada ação](docs/email.png)
 
 **Ações acompanhadas:** BBAS3, ITSA4, CXSE3, CMIG4, EGIE3 e INTB3.
 
 ## Como funciona
 
-```
-CVM (DFP + ITR) ──► GitHub Actions (semanal) ──► data/fundamentos.csv
-                                                        │
-Google Finance (preço) ──► Google Sheets ◄── Apps Script lê o CSV
-                                │
-                                ▼
-                  Apps Script (segunda, 8h) ──► e-mail HTML
-```
+![Fluxo: dados da CVM, Python e pandas, GitHub Actions, Apps Script, Google Sheets e e-mail](docs/fluxo.png)
 
 1. **`fundamentos_cvm.py`** baixa os arquivos DFP (anual) e ITR (trimestral) da CVM, acha as empresas pelo nome, confere os CNPJs e calcula lucro 12m, patrimônio líquido e quantidade de ações.
 2. **GitHub Actions** (`.github/workflows/atualizar_fundamentos.yml`) roda o script toda semana e publica `data/fundamentos.csv`. Não usa nenhum segredo, só o token automático do GitHub.
@@ -74,7 +66,7 @@ Edite os dicionários `EMPRESAS` (regex do nome da empresa na CVM) e `ESCALA_ACO
 - Aba `Fundamentos`: importe `data/fundamentos_sheets.csv` (separador `;`).
 - Aba `Painel`, linha 1: `Ticker | Preço | Ações ON | Ações PN | LL 12m | PL | Data-base | LPA | P/L | P/VP | ROE`. Na coluna A (a partir da linha 2), os tickers. Fórmulas da linha 2:
 
-```
+```text
 B2: =GOOGLEFINANCE("BVMF:"&A2;"price")
 C2: =PROCV($A2;Fundamentos!$A:$L;9;0)
 D2: =PROCV($A2;Fundamentos!$A:$L;10;0)
@@ -89,7 +81,7 @@ K2: =E2/F2
 
 ### 4. E-mail automático
 - No Apps Script da planilha, cole `enviar_relatorio.gs` e troque `SEU_USUARIO/SEU_REPO` em `URL_FUNDAMENTOS` pelo seu repositório.
-- Rode `enviarRelatorio` uma vez (autorize o Gmail e o acesso externo) e depois `criarTriggerSemanal` para agendar o envio de segunda, às 8h.
+- Rode `enviarRelatorio` uma vez (autorize o Gmail e o acesso externo) e depois `criarTriggerSemanal` para agendar o envio de segunda-feira, em algum horário entre 8h e 9h (a janela é definida pelo Google).
 
 ### 5. Atualização automática
 Em *Actions*, habilite os workflows e rode **Atualizar fundamentos (CVM)** uma vez. Depois ele roda sozinho toda semana. Em repositório público, o GitHub desativa agendamentos após 60 dias sem atividade; o workflow grava `data/ultima_atualizacao.txt` a cada execução para evitar isso.
