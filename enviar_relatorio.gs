@@ -16,9 +16,9 @@
 const ABA_PAINEL = 'Painel';
 const ABA_FUNDAMENTOS = 'Fundamentos';
 
-// Troque SEU_USUARIO e SEU_REPO pelos do seu repositorio PUBLICO no GitHub.
+// Troque SEU_USUARIO e SEU_REPO pelos do seu repositorio PUBLICO no GitHub. Aqui usei o meu, mas se você estiver tentando me replicar tem que fazer esta mudança.
 const URL_FUNDAMENTOS =
-  'https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/data/fundamentos.csv';
+  'https://raw.githubusercontent.com/Lydson/relatorio-semanal-acoes-b3/main/data/fundamentos.csv';
 
 const COLUNAS_ESPERADAS = [
   'ticker', 'cnpj', 'dt_itr', 'll_exercicio', 'll_acum_atual', 'll_acum_ant',
