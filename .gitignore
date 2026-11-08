@@ -1,0 +1,23 @@
+# Cache dos ZIPs da CVM (dezenas de MB, nao precisa ir pro GitHub)
+cvm_cache/
+
+# CSV em formato pt-BR, so para importacao manual no Sheets
+data/fundamentos_sheets.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Segredos e credenciais (nunca versionar)
+.env
+*.json
+*.pem
+*.key
+
+# Editor / sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
