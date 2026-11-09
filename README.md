@@ -2,7 +2,9 @@
 
 Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a partir dos **dados abertos da CVM**, e toda segunda de manhã chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
 
-![E-mail semanal com preço, P/L, P/VP e ROE de cada ação](docs/email.png)
+<p align="center">
+  <img src="docs/email.png" alt="E-mail semanal com preço, P/L, P/VP e ROE de cada ação" width="560">
+</p>
 
 **Ações acompanhadas:** BBAS3, ITSA4, CXSE3, CMIG4, EGIE3 e INTB3.
 
