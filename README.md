@@ -1,6 +1,6 @@
 # Relatório semanal de ações da B3
 
-Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a partir dos **dados abertos da CVM**, e toda segunda de manhã chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
+Todo domingo à noite um robô recalcula os fundamentos de algumas ações que eu escolhi da B3 a partir dos **dados abertos da CVM**, e toda segunda de manhã chega um e-mail com **preço, P/L, P/VP e ROE** de cada uma. Tudo gratuito, sem API paga e sem guardar nenhuma senha.
 
 <p align="center">
   <img src="docs/email.png" alt="E-mail semanal com preço, P/L, P/VP e ROE de cada ação" width="560">
@@ -13,7 +13,7 @@ Todo domingo à noite um robô recalcula os fundamentos de 6 ações da B3 a par
 ![Fluxo: dados da CVM, Python e pandas, GitHub Actions, Apps Script, Google Sheets e e-mail](docs/fluxo.png)
 
 1. **`fundamentos_cvm.py`** baixa os arquivos DFP (anual) e ITR (trimestral) da CVM, acha as empresas pelo nome, confere os CNPJs e calcula lucro 12m, patrimônio líquido e quantidade de ações.
-2. **GitHub Actions** (`.github/workflows/atualizar_fundamentos.yml`) roda o script toda semana e publica `data/fundamentos.csv`. Não usa nenhum segredo, só o token automático do GitHub.
+2. **GitHub Actions** (`.github/workflows/atualizar_fundamentos.yml`) roda o script toda semana e publica `data/fundamentos.csv`. Só com o token automático do GitHub.
 3. **`enviar_relatorio.gs`** (Apps Script) baixa o CSV, atualiza a aba `Fundamentos` da planilha, lê a aba `Painel` (preço via `GOOGLEFINANCE` + fórmulas) e envia o e-mail.
 
 ### Por que calcular em vez de usar uma API?
